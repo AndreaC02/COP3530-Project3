@@ -22,4 +22,9 @@ class hashTable{
     bool has(string title);
     void remove(string title);
 
+    //helper functions for main method
+    vector<Series> findMovieTitle(string title);
+    vector<Series> findDirector(string director);
+    vector<Series> findActor(string actor);
+    vector<Series> findRuntime(int timeMin, int timeMax, int type);
 };

@@ -31,7 +31,7 @@ int main(){
                 break;
             }
             case 3:
-            {
+            {//can be minutes or seasons and then input the type into function (0 for seasons, 1 for minutes)
                 cout << "Please input a maximum runtime in minutes:" << endl;
                 int maximum;
                 cin >> maximum;

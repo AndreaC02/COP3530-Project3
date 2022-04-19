@@ -72,3 +72,41 @@ void hashTable:: remove(string title){
     }
 
 }
+
+vector<Series> hashTable:: findMovieTitle(string title){
+    return map[hashfunction(title)];
+}
+
+vector<Series> hashTable:: findDirector(string director){
+    vector<Series> series;
+    for(int i = 0; i < buckets; i++)
+        for(Series s: map[i])
+            if(s.getDirector() == director)
+                series.push_back(s);
+    return series;
+}
+
+vector<Series> hashTable:: findActor(string actor){
+    vector<Series> series;
+    for(int i = 0; i < buckets; i++)
+        for(Series s: map[i])
+            for(actors a: s.getCast()){
+                if(a == actor){
+                    series.push_back(s);
+                    break;
+                }
+            }
+    return series;
+}
+
+
+vector<Series> hashTable:: findRuntime(int timeMin, int timeMax, int type){
+    vector<Series> series;
+    for(int i = 0; i < buckets; i++)
+        for(Series s: map[i])
+            if(s.getDurationType() == type)
+                if(s.getDurationTime() >= timeMin  && s.getDurationTime() <= timeMax)
+                    series.push_back(s);
+    return series;
+}
+
