@@ -1,5 +1,5 @@
 #pragma once
-#include <series.h>
+#include "series.h"
 
 Series:: Series(int id, int type, int dateAdded, int releaseYr, int durTime, string title, string dir, 
     vector<string> castList, string country, string rating){

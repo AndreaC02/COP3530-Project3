@@ -1,4 +1,4 @@
-//movie attributes
+//movie or tv show attributes
 #include <iostream>
 #include <vector>
 using namespace std;
