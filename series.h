@@ -18,11 +18,12 @@ class Series{
     string rating;
     vector<string> genre;
     string description;
+    string streamingPlatform;
 
 public:
     Series();
     Series(int id, int type, int dateAdded, int releaseYr, int durTime, string title, string dir,
-           vector<string> cast, string country, string rating, vector<string> genres, string description);
+           vector<string> cast, string country, string rating, vector<string> genres, string description, string platform);
     int getSeriesId();
     int getType();
     int getDateAdded();
@@ -37,4 +38,5 @@ public:
     string getRating();
     vector<string> getGenre();
     string getDescription();
+    string getStreamingPlatform();
 };

@@ -22,7 +22,7 @@ Series:: Series(){
 }
 
 Series:: Series(int id, int type, int _dateAdded, int releaseYr, int durTime, string _title, string dir,
-                vector<string> castList, string country, string _rating, vector<string> genres, string _description){
+                vector<string> castList, string country, string _rating, vector<string> genres, string _description, string platform){
     seriesId = id;
     type = type;
     dateAdded = _dateAdded;
@@ -41,6 +41,7 @@ Series:: Series(int id, int type, int _dateAdded, int releaseYr, int durTime, st
     rating = _rating;
     genre = genres;
     description = _description;
+    streamingPlatform = platform;
 }
 
 int Series:: getSeriesId(){
@@ -71,3 +72,5 @@ int Series:: getSeriesId(){
     return genre;}
     string Series:: getDescription (){
     return description; }
+    string Series:: getStreamingPlatform(){
+        return streamingPlatform;}
