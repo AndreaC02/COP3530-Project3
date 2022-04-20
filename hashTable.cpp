@@ -1,14 +1,16 @@
 #pragma once
 #include <math.h>
 #include "hashTable.h"
+#include <vector>
+#include "series.h"
 
 using namespace std;
 
-hashTable:: HashTable(int b){
+hashTable:: hashTable(int b){
     maxLoadFactor = .7;
     buckets = b;
     elements = 0;
-    map = vector<Series> [buckets];
+    map.resize(buckets);
 }
 
 float hashTable:: calculateLoadFactor(){
@@ -19,39 +21,40 @@ float hashTable:: calculateLoadFactor(){
 int hashTable:: hashFunction(string title){
     //hash function
     int index = 0;
-    int i = 0;
+    int i = title.length() - 1;
     for(char c: title){
-        index = int(c) * math.Pow(7, i);
-        t++;
+        index = int(c) * pow(7, i);
+        i++;
     }
 
     //reduce
     index %= buckets;
-    return buckets;
+    return index;
 }
 
 void hashTable:: insert(Series s){
     int index = hashFunction(s.getTitle());
-    map[index].push_back(s);
+    map.at(index).push_back(s);
     elements++;
     if(calculateLoadFactor() > maxLoadFactor)
         rehash();
-    
+
 }
 
 void hashTable:: rehash(){
     buckets *= 2;
-    vector<Series> [buckets] resizedMap;
+    vector<vector<Series>> resizedMap;
+    resizedMap.resize(buckets);
     for(int i = 0; i < buckets / 2; i++){
-        for(int j = 0; j < map[i].size(); j++){
-            resizedMap.insert(map[i].at(j));
+        for(int j = 0; j < map.at(i).size(); j++){
+            resizedMap.at(i).push_back(map.at(i).at(j));
         }
     }
     map = resizedMap;
 }
 
 bool hashTable:: has(string title){
-    vector<Series> temp = map[hashFunction(title)];
+    vector<Series> temp = map.at(hashFunction(title));
     for(Series s: temp){
         if(s.getTitle() == title)
             return true;
@@ -64,33 +67,31 @@ void hashTable:: remove(string title){
     if(has(title)){
         int i = 0;
         for(Series s: map[index]){
-            if(s.getTitle == title)
-                map[index].erase(map[index].begin() + i);
+            if(s.getTitle() == title)
+                map.at(index).erase(map.at(index).begin() + i);
             i++;
         }
-            
     }
-
 }
 
 vector<Series> hashTable:: findMovieTitle(string title){
-    return map[hashfunction(title)];
+    return map.at(hashFunction(title));
 }
 
 vector<Series> hashTable:: findDirector(string director){
     vector<Series> series;
     for(int i = 0; i < buckets; i++)
-        for(Series s: map[i])
+        for(Series s: map.at(i))
             if(s.getDirector() == director)
                 series.push_back(s);
-    return series;
+            return series;
 }
 
 vector<Series> hashTable:: findActor(string actor){
     vector<Series> series;
     for(int i = 0; i < buckets; i++)
-        for(Series s: map[i])
-            for(actors a: s.getCast()){
+        for(Series s: map.at(i))
+            for(string a: s.getCast()){
                 if(a == actor){
                     series.push_back(s);
                     break;
@@ -104,9 +105,21 @@ vector<Series> hashTable:: findRuntime(int timeMin, int timeMax, int type){
     vector<Series> series;
     for(int i = 0; i < buckets; i++)
         for(Series s: map[i])
-            if(s.getDurationType() == type)
+            if(s.getType() == type)
                 if(s.getDurationTime() >= timeMin  && s.getDurationTime() <= timeMax)
                     series.push_back(s);
-    return series;
+                return series;
+}
+
+int hashTable::getSize() {
+    return buckets;
+}
+
+void hashTable::printElements() {
+    for (int i = 0; i < map.size(); ++i) {
+        for (Series j: map.at(i)) {
+            cout << j.getTitle() << endl;
+        }
+    }
 }
 

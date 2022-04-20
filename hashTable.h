@@ -1,5 +1,5 @@
-
 //hash table definition
+
 #include <iostream>
 #include <vector>
 #include "series.h"
@@ -11,16 +11,18 @@ class hashTable{
     int buckets;//table size
     int elements;
 
-    vector<Series> map[];//array of vectors;
+    vector<vector<Series>> map;//vector of vectors;
 
-    public:
-    HashTable(int b);
+public:
+    hashTable(int b);
     float calculateLoadFactor();
     int hashFunction(string title);
     void insert(Series s);
     void rehash();//rehash when table is resized
     bool has(string title);
     void remove(string title);
+    int getSize();
+    void printElements();
 
     //helper functions for main method
     vector<Series> findMovieTitle(string title);

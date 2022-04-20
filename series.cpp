@@ -1,11 +1,31 @@
+//
+// Created by Andrea Chacon on 4/20/22.
+//
 #pragma once
 #include "series.h"
 
-Series:: Series(int id, int type, int dateAdded, int releaseYr, int durTime, string title, string dir, 
-    vector<string> castList, string country, string rating, vector<string> genres, string description){
+Series:: Series(){
+    seriesId = -1;
+    type = -1;
+    dateAdded = -1;
+    releaseYear = -1;
+    durationTime = -1;
+    similarityRanking = 0;
+    durationType = ""; //gives min or seasons
+    title = "";
+    director = "";
+    cast = {};
+    countryOfProduction = "";
+    rating = "";
+    genre = {};
+    description = "";
+}
+
+Series:: Series(int id, int type, int _dateAdded, int releaseYr, int durTime, string _title, string dir,
+                vector<string> castList, string country, string _rating, vector<string> genres, string _description){
     seriesId = id;
     type = type;
-    dateAdded = dateAdded;
+    dateAdded = _dateAdded;
     releaseYear = releaseYr;
     similarityRanking = 0;
     durationTime = durTime;
@@ -13,41 +33,41 @@ Series:: Series(int id, int type, int dateAdded, int releaseYr, int durTime, str
         durationType = "seasons";
     else
         durationType = "minutes";
-    title = title;
+    title = _title;
     director = dir;
     for(string c: castList)
         cast.push_back(c);
     countryOfProduction = country;
-    rating = rating;
+    rating = _rating;
     genre = genres;
-    description = description;
+    description = _description;
 }
 
 int Series:: getSeriesId(){
     return seriesId; }
-int Series:: getType(){
+    int Series:: getType(){
     return type; }
-int Series:: getDateAdded(){
+    int Series:: getDateAdded(){
     return dateAdded; }
-int Series:: getReleaseYear(){
+    int Series:: getReleaseYear(){
     return releaseYear; }
-int Series:: getSimilarityRanking(){
+    int Series:: getSimilarityRanking(){
     return similarityRanking;}
-int Series:: getDurationTime(){
+    int Series:: getDurationTime(){
     return durationTime; }
-string Series:: getDurationType(){
+    string Series:: getDurationType(){
     return durationType; }
-string Series:: getTitle(){
+    string Series:: getTitle(){
     return title; }
-string Series:: getDirector(){
+    string Series:: getDirector(){
     return director; }
-vector<string> Series:: getCast(){
+    vector<string> Series:: getCast(){
     return cast; }
-string Series:: getCountryofProduction(){
+    string Series:: getCountryofProduction(){
     return countryOfProduction; }
-string Series:: getRating(){
+    string Series:: getRating(){
     return rating; }
-vector<string> Series:: getGenre(){
+    vector<string> Series:: getGenre(){
     return genre;}
-string Series:: getDescription (){
+    string Series:: getDescription (){
     return description; }

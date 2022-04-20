@@ -2,6 +2,23 @@
 using namespace std;
 
 int main(){
+    /*
+    //THIS IS WHAT I USED TO TEST THE HASHTABLE, I'm leaving it in case you need examples to test with
+    hashTable myMap = hashTable(2);
+    Series series1 = Series(0, 0, 01012000, 2000, 90, "series1", "director1",
+    {"castMember1", "castMember2", "castMember3" }, "France", "MA", {"horror", "true crime"}, "description 1");
+    Series series2 = Series(0, 0, 01012000, 2000, 90, "series2", "director1",
+            {"castMember1", "castMember2"}, "France", "MA", {"horror", "true crime"}, "description ");
+    Series series3 = Series(0, 0, 01012000, 2000, 90, "series3", "director2",
+                            {"castMember1", "castMember2"}, "America", "MA", {"horror", "true crime"}, "description 3");
+    myMap.insert(series1);
+    myMap.insert(series2);
+    myMap.insert(series3);
+    myMap.printElements();
+    vector<Series> sameDir = myMap.findDirector("director1");
+    for(Series s: sameDir)
+        cout << s.getTitle() << endl;
+    */
     
     int selection;
     bool keep;

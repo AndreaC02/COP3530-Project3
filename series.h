@@ -11,7 +11,7 @@ class Series{
     int durationTime; //min or seasons
     int similarityRanking;
     string durationType; //gives min or seasons
-    string title; 
+    string title;
     string director;
     vector<string> cast;
     string countryOfProduction;
@@ -19,9 +19,10 @@ class Series{
     vector<string> genre;
     string description;
 
-    public: 
-    Series(int id, int type, int dateAdded, int releaseYr, int durTime, string title, string dir, 
-        vector<string> cast, string country, string rating, vector<string> genres, string description);
+public:
+    Series();
+    Series(int id, int type, int dateAdded, int releaseYr, int durTime, string title, string dir,
+           vector<string> cast, string country, string rating, vector<string> genres, string description);
     int getSeriesId();
     int getType();
     int getDateAdded();
