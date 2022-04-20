@@ -2,7 +2,7 @@
 #include "series.h"
 
 Series:: Series(int id, int type, int dateAdded, int releaseYr, int durTime, string title, string dir, 
-    vector<string> castList, string country, string rating){
+    vector<string> castList, string country, string rating, vector<string> genres, string description){
     seriesId = id;
     type = type;
     dateAdded = dateAdded;
@@ -19,6 +19,8 @@ Series:: Series(int id, int type, int dateAdded, int releaseYr, int durTime, str
         cast.push_back(c);
     countryOfProduction = country;
     rating = rating;
+    genre = genres;
+    description = description;
 }
 
 int Series:: getSeriesId(){
@@ -45,3 +47,7 @@ string Series:: getCountryofProduction(){
     return countryOfProduction; }
 string Series:: getRating(){
     return rating; }
+vector<string> Series:: getGenre(){
+    return genre;}
+string Series:: getDescription (){
+    return description; }

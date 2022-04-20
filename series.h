@@ -16,10 +16,12 @@ class Series{
     vector<string> cast;
     string countryOfProduction;
     string rating;
+    vector<string> genre;
+    string description;
 
     public: 
     Series(int id, int type, int dateAdded, int releaseYr, int durTime, string title, string dir, 
-        vector<string> cast, string country, string rating);
+        vector<string> cast, string country, string rating, vector<string> genres, string description);
     int getSeriesId();
     int getType();
     int getDateAdded();
@@ -32,4 +34,6 @@ class Series{
     vector<string> getCast();
     string getCountryofProduction();
     string getRating();
+    vector<string> getGenre();
+    string getDescription();
 };
