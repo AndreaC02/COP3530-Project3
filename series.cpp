@@ -7,6 +7,7 @@ Series:: Series(int id, int type, int dateAdded, int releaseYr, int durTime, str
     type = type;
     dateAdded = dateAdded;
     releaseYear = releaseYr;
+    similarityRanking = 0;
     durationTime = durTime;
     if(type == 0)
         durationType = "seasons";
@@ -28,6 +29,8 @@ int Series:: getDateAdded(){
     return dateAdded; }
 int Series:: getReleaseYear(){
     return releaseYear; }
+int Series:: getSimilarityRanking(){
+    return similarityRanking;}
 int Series:: getDurationTime(){
     return durationTime; }
 string Series:: getDurationType(){

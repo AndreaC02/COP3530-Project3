@@ -9,6 +9,7 @@ class Series{
     int dateAdded; //MMDDYYYY for simplest formating
     int releaseYear; //YYYY
     int durationTime; //min or seasons
+    int similarityRanking;
     string durationType; //gives min or seasons
     string title; 
     string director;
@@ -23,6 +24,7 @@ class Series{
     int getType();
     int getDateAdded();
     int getReleaseYear();
+    int getSimilarityRanking();
     int getDurationTime();
     string getDurationType();
     string getTitle();
