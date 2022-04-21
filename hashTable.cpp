@@ -26,7 +26,7 @@ int hashTable:: hashFunction(string title){
         index = int(c) * pow(7, i);
         i--;
     }
-    
+
     //reduce
     index %= buckets;
     return index;
@@ -67,8 +67,10 @@ void hashTable:: remove(string title){
     if(has(title)){
         int i = 0;
         for(Series s: map[index]){
-            if(s.getTitle() == title)
+            if(s.getTitle() == title){
                 map.at(index).erase(map.at(index).begin() + i);
+                elements--;
+            }
             i++;
         }
     }
