@@ -183,6 +183,50 @@ hashTable platformSelect(string platform, int type){
 
 }
 
+void printMethod(vector<Series> series){
+
+    bool cont = true;
+    while(cont == true){
+
+        int var;
+        int index = 0;
+        for(int l = 0; l <= 9; l++){
+
+            if(index < series.size()){
+
+                series.at(l).print();
+
+            }
+            if(index == series.size()){
+                
+                cout << "End of list." << endl;
+                break;
+
+            }
+
+            index++;
+
+        }
+        
+        if(index < series.size()){
+
+            cout << "Would you like to see more options? \n1.    Yes\n2.    No" << endl;
+            cin >> var;
+            if(var == 1){
+                cont = true;
+            }else if(var == 0){
+                cont = false;
+            }else{
+                cout << "Invalid selection! Please try again." << endl;
+                cont = true;
+            }
+
+        }
+
+    }
+
+}
+
 int main(){
     /*
     //THIS IS WHAT I USED TO TEST THE HASHTABLE, I'm leaving it in case you need examples to test with
@@ -236,6 +280,7 @@ int main(){
 
     */ 
 
+
     unsigned int selection;
     bool keep;
     unsigned int dataType;   
@@ -269,7 +314,7 @@ int main(){
     
     while(keep == true){
         
-        cout << "\nPlease input below whether you would like to \n1. Receive suggestions based on your favorite series\n2. Receive movie/show suggestions based on input\n 3. Quit" << endl;
+        cout << "\nPlease input below whether you would like to \n1. Receive suggestions based on your favorite series\n2. Receieve movie/show suggestions based on input\n 3. Quit" << endl;
         cin >> input;
         if(input == 3){
 
@@ -337,6 +382,7 @@ int main(){
                             cin >> director;
 
                             series = platformSelect(platform, dataType-1).findDirector(director);
+                            printMethod(series);
 
                             break;
                         }
@@ -351,6 +397,7 @@ int main(){
                                 cin >> minMin;
 
                                 series = platformSelect(platform, 1).findRuntime(minMin, maxMin, 1);
+                                printMethod(series);
 
                             }else if(dataType == 1){
 
@@ -360,6 +407,7 @@ int main(){
                                 cin >> minSeason;
 
                                 series = platformSelect(platform, 0).findRuntime(minSeason, maxSeason, 0);
+                                printMethod(series);
                             
                             }
                             break;
@@ -370,7 +418,8 @@ int main(){
                             cout << "Please input the name of your desired actor:" << endl;
                             cin  >> actor;
 
-                            series = platformSelect(platform, dataType-1).findActor(actor); 
+                            series = platformSelect(platform, dataType-1).findActor(actor);
+                            printMethod(series); 
 
                             break;
                         }
@@ -383,7 +432,8 @@ int main(){
                             cin  >> var;
                             genreChose = possGenres[var-1];
                           
-                            series = platformSelect(platform, dataType-1).findGenre(genreChose); 
+                            series = platformSelect(platform, dataType-1).findGenre(genreChose);
+                            printMethod(series); 
 
                             break;
                         }
@@ -392,7 +442,8 @@ int main(){
                             cout << "Please input the release year you are looking for:" << endl;
                             cin  >> year;
 
-                            series = platformSelect(platform, dataType-1).findReleaseYear(year); 
+                            series = platformSelect(platform, dataType-1).findReleaseYear(year);
+                            printMethod(series); 
 
 
                             break;
@@ -418,6 +469,7 @@ int main(){
 
                                 ratingChose = tvRatings[var-1];  
                                 series = platformSelect(platform, dataType-1).findRating(ratingChose);
+                                printMethod(series);
 
                             break;
                         }
@@ -428,8 +480,6 @@ int main(){
                         }
 
                     }
-
-                
 
             }
 
@@ -461,10 +511,10 @@ int main(){
 
                 cout << "\nGreat! Here are suggested movies and TV shows based off of this title:" << endl;
                 Heap myHeap;
-                vector<Series> reducedSimilar = ALL.findGenre(s.getGenre[0]);
+                vector<Series> reducedSimilar = ALL.findGenre(s.getGenre()[0]);
                 myHeap.setComparison(s);
                 myHeap.setMaxHeap(reducedSimilar);
-                myHeap.setAllSimilarities();
+                myHeap.setAllSimilarities(reducedSimilar);
                 for(Series x: reducedSimilar)
                     myHeap.push(x);
                 //figure out building heap here
@@ -473,22 +523,22 @@ int main(){
                 bool more;
                 do{
                    for(int i = 0; i < 5; i++){
-                       myHeap.top().print;
+                       myHeap.top().print();
                        myHeap.pop();
                    } 
 
-                   cout << "Would you like to see the next 5 suggestions?\nEnter 0 for no and 1 for yes!" >> endl;
+                   cout << "Would you like to see the next 5 suggestions?\nEnter 0 for no and 1 for yes!" << endl;
                    string moreSugg;
                    cin >> moreSugg;
-                   if(moreSugg == 0)
+                   if(moreSugg == "0")
                         more = false;
-                    else if(moreSugg == 1)
+                    else if(moreSugg == "1")
                         more = true;
                     else{
-                        cout << "Invalid selection!\nPrinting the next 5 suggestions!"
+                        cout << "Invalid selection!\nPrinting the next 5 suggestions!" << endl;
                     }
 
-                }while(more = true)
+                }while(more == true);
 
 
             }else if(var == 0){
