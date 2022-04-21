@@ -9,17 +9,17 @@ Heap::Heap()
 
 }   
 
-void Heap::setComparison(series _comparison)
+void Heap::setComparison(Series _comparison)
 {
     comparison = _comparison;
 }
 
-void Heap::setMaxHeap(vector<series> _maxHeap)
+void Heap::setMaxHeap(vector<Series> _maxHeap)
 {
     maxHeap = _maxHeap;
 }
 
-void Heap::push(series obj)
+void Heap::push(Series obj)
 {
     maxHeap.push_back(obj);
     int child = maxHeap.size() - 1;
@@ -71,7 +71,7 @@ void Heap::pop()
 
 }
 
-series Heap::top()
+Series Heap::top()
 {
     
     return maxHeap[0];
@@ -86,7 +86,7 @@ void Heap::printSimilarities()
     }
 }
 
-void Heap::setSimilarityRanking(series curr)
+void Heap::setSimilarityRanking(Series curr)
 {
     int similarityRanking = 0;
 
@@ -168,7 +168,7 @@ void Heap::heapSort(int index)
     }
 }
 
-void Heap::setAllSimilarities(vector<series> vect)
+void Heap::setAllSimilarities(vector<Series> vect)
 {
     for (int i = 0; i < vect.size(); i++)
     {

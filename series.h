@@ -3,7 +3,7 @@
 #include <vector>
 using namespace std;
 
-class series{
+class Series{
     string seriesId;
     int type; //0 for tv show, 1 for movie
     int dateAdded; //MMDDYYYY for simplest formating
@@ -21,8 +21,8 @@ class series{
     string streamingPlatform;
 
 public:
-    series();
-    series(string id, int type, int dateAdded, int releaseYr, int durTime, string title, string dir,
+    Series();
+    Series(string id, int type, int dateAdded, int releaseYr, int durTime, string title, string dir,
            vector<string> cast, string country, string rating, vector<string> genres, string description, string platform);
     string getSeriesId();
     int getType();
