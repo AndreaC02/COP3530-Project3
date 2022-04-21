@@ -236,7 +236,6 @@ int main(){
 
     */ 
 
-
     unsigned int selection;
     bool keep;
     unsigned int dataType;   
@@ -270,7 +269,7 @@ int main(){
     
     while(keep == true){
         
-        cout << "\nPlease input below whether you would like to \n1. Look up a movie\n2. Receieve movie/show suggestions based on input\n 3. Quit" << endl;
+        cout << "\nPlease input below whether you would like to \n1. Receive suggestions based on your favorite series\n2. Receive movie/show suggestions based on input\n 3. Quit" << endl;
         cin >> input;
         if(input == 3){
 
@@ -441,13 +440,55 @@ int main(){
             Series s;
             s = ALL.findTitle(title);
 
-            s.print();
+            bool validTitle = s.print();
 
-            cout << "\nWould you like suggestions based off this title?\n1.    Yes\n2.    No" << endl;
-            cin >> var;
+            if(validTitle){
+                cout << "\nWould you like suggestions based off this title?\n1.    Yes\n2.    No" << endl;
+                cin >> var;
+            }
+
+            else{
+                while(!validTitle){
+                    cout << "\nPlease input name of media you are searching for:" << endl;
+                    cin >> title;
+                    bool validTitle = s.print();
+                }
+                
+            }
+
+            
             if(var == 1){
 
                 cout << "\nGreat! Here are suggested movies and TV shows based off of this title:" << endl;
+                Heap myHeap;
+                vector<Series> reducedSimilar = ALL.findGenre(s.getGenre[0]);
+                myHeap.setComparison(s);
+                myHeap.setMaxHeap(reducedSimilar);
+                myHeap.setAllSimilarities();
+                for(Series x: reducedSimilar)
+                    myHeap.push(x);
+                //figure out building heap here
+
+                cout << "Here are the top 5 suggestions: ";
+                bool more;
+                do{
+                   for(int i = 0; i < 5; i++){
+                       myHeap.top().print;
+                       myHeap.pop();
+                   } 
+
+                   cout << "Would you like to see the next 5 suggestions?\nEnter 0 for no and 1 for yes!" >> endl;
+                   string moreSugg;
+                   cin >> moreSugg;
+                   if(moreSugg == 0)
+                        more = false;
+                    else if(moreSugg == 1)
+                        more = true;
+                    else{
+                        cout << "Invalid selection!\nPrinting the next 5 suggestions!"
+                    }
+
+                }while(more = true)
 
 
             }else if(var == 0){

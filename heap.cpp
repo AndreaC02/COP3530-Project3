@@ -13,10 +13,12 @@ void Heap::setComparison(Series _comparison)
 {
     comparison = _comparison;
 }
+
 void Heap::setMaxHeap(vector<Series> _maxHeap)
 {
     maxHeap = _maxHeap;
 }
+
 void Heap::push(Series obj)
 {
     maxHeap.push_back(obj);
@@ -68,6 +70,7 @@ void Heap::pop()
     
 
 }
+
 Series Heap::top()
 {
     

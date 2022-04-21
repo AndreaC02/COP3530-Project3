@@ -39,6 +39,6 @@ public:
     vector<string> getGenre();
     string getDescription();
     string getStreamingPlatform();
-    void print();
+    bool print();
     void setSimilarityRanking(int r);
 };

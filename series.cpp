@@ -72,9 +72,11 @@ string Series:: getSeriesId(){
     string Series:: getStreamingPlatform(){
         return streamingPlatform;}
     
-    void Series:: print(){
-        if(title == "" )
-            cout << "Sorry, no title found" << endl;
+    bool Series:: print(){
+        if(title == "" ){
+            cout << "Sorry, no title found!" << endl;
+            return false;
+        }
         else{
             cout << title << " " << rating << endl; 
             cout << "Duration time" << durationTime << " " << durationType << endl;
@@ -88,6 +90,7 @@ string Series:: getSeriesId(){
                 cout << g << ", ";
             cout << endl << "Streaming Platform: " << streamingPlatform;
             cout << "Description: " << description;
+            return true;
         }
     }
 
