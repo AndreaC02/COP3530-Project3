@@ -26,7 +26,7 @@ public:
     void printElements(); //just prints titles, for debugging
 
     //helper functions for main method
-    vector<Series> findMovieTitle(string title);
+    vector<Series> findTitle(string title);
     vector<Series> findDirector(string director);
     vector<Series> findActor(string actor);
     vector<Series> findRuntime(int timeMin, int timeMax, int type);

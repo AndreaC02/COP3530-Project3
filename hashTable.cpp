@@ -86,7 +86,7 @@ void hashTable::printElements() {
     }
 }
 
-vector<Series> hashTable:: findMovieTitle(string title){
+vector<Series> hashTable:: findTitle(string title){
     for(Series s: map.at(hashFunction(title)))
         if(s.getTitle() == title)
             return s;
@@ -113,7 +113,6 @@ vector<Series> hashTable:: findActor(string actor){
             }
     return series;
 }
-
 
 vector<Series> hashTable:: findRuntime(int timeMin, int timeMax, int type){
     vector<Series> series;
