@@ -39,4 +39,5 @@ public:
     vector<string> getGenre();
     string getDescription();
     string getStreamingPlatform();
+    void printSeries();
 };
