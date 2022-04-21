@@ -74,6 +74,18 @@ void hashTable:: remove(string title){
     }
 }
 
+int hashTable::getSize() {
+    return buckets;
+}
+
+void hashTable::printElements() {
+    for (int i = 0; i < map.size(); ++i) {
+        for (Series j: map.at(i)) {
+            cout << j.getTitle() << endl;
+        }
+    }
+}
+
 vector<Series> hashTable:: findMovieTitle(string title){
     for(Series s: map.at(hashFunction(title)))
         if(s.getTitle() == title)
@@ -86,7 +98,7 @@ vector<Series> hashTable:: findDirector(string director){
         for(Series s: map.at(i))
             if(s.getDirector() == director)
                 series.push_back(s);
-            return series;
+    return series;
 }
 
 vector<Series> hashTable:: findActor(string actor){
@@ -110,18 +122,33 @@ vector<Series> hashTable:: findRuntime(int timeMin, int timeMax, int type){
             if(s.getType() == type)
                 if(s.getDurationTime() >= timeMin  && s.getDurationTime() <= timeMax)
                     series.push_back(s);
-                return series;
+    return series;
 }
 
-int hashTable::getSize() {
-    return buckets;
+vector<Series> hashTable:: findGenre(string genre){
+   vector<Series> series;
+    for(int i = 0; i < buckets; i++)
+        for(Series s: map[i])
+            for(string g: s.getGenre())
+                if(g == genre)
+                    series.push_back(s);
+    return series; 
 }
 
-void hashTable::printElements() {
-    for (int i = 0; i < map.size(); ++i) {
-        for (Series j: map.at(i)) {
-            cout << j.getTitle() << endl;
-        }
-    }
+vector<Series> hashTable:: findReleaseYear(int year){
+   vector<Series> series;
+    for(int i = 0; i < buckets; i++)
+        for(Series s: map[i])
+            if(s.getReleaseYear() == year)
+                series.push_back(s);
+    return series; 
 }
 
+vector<Series> hashTable:: findRating(string rating){
+   vector<Series> series;
+    for(int i = 0; i < buckets; i++)
+        for(Series s: map[i])
+            if(s.getRating() == rating)
+                series.push_back(s);
+    return series; 
+}

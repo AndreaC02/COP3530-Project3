@@ -30,4 +30,7 @@ public:
     vector<Series> findDirector(string director);
     vector<Series> findActor(string actor);
     vector<Series> findRuntime(int timeMin, int timeMax, int type);
+    vector<Series> findGenre(string genre);
+    vector<Series> findReleaseYear(int releaseYr);
+    vector<Series> findRating(string rating);
 };
