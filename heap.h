@@ -17,6 +17,8 @@ public:
     void setSimilarityRanking(Series curr);
     void buildHeap();
     void heapify(int index);
+    void setComparison(Series _comparison);
+    void setMaxHeap(vector<Series> maxHeap);
     
     
 

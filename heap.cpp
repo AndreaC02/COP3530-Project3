@@ -7,7 +7,16 @@ using namespace std;
 Heap::Heap()
 {
 
-}    
+}   
+
+void Heap::setComparison(Series _comparison)
+{
+    comparison = _comparison;
+}
+void Heap::setMaxHeap(vector<Series> _maxHeap)
+{
+    maxHeap = _maxHeap;
+}
 void Heap::push(Series obj)
 {
     maxHeap.push_back(obj);
@@ -71,7 +80,6 @@ void Heap::printSimilarities()
     for (int i = 0; i < maxHeap.size(); i++)
     {
         cout << maxHeap[i].getSimilarityRanking() << " " ;
-
     }
 }
 
@@ -123,8 +131,6 @@ void Heap::setSimilarityRanking(Series curr)
     {
         similarityRanking += 3;
     }
-
-
 
     curr.setSimilarityRanking(similarityRanking);
     
