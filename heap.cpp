@@ -93,7 +93,7 @@ void Heap::setSimilarityRanking(Series curr)
         for (int j = 0; j < curr.getGenre().size(); j++)
         {
             if (comparison.getGenre()[i] == curr.getGenre()[j])
-                similarityRanking += 10;
+                similarityRanking += 1;
 
         }
     }
@@ -102,15 +102,15 @@ void Heap::setSimilarityRanking(Series curr)
     int difference = comparison.getReleaseYear() - curr.getReleaseYear();
     difference = abs(difference);
     if (difference <= 5)
-        similarityRanking += 7;
+        similarityRanking += 2;
     else if (difference <= 10)
-        similarityRanking += 5;
+        similarityRanking += 1;
     
       
     // director
     if (comparison.getDirector() == curr.getDirector())
     {
-        similarityRanking += 5;
+        similarityRanking += 2;
     }
 
     // cast
@@ -119,7 +119,7 @@ void Heap::setSimilarityRanking(Series curr)
         for (int l = 0; l < curr.getCast().size(); l++)
         {
             if (comparison.getCast()[k] == curr.getCast()[l])
-                similarityRanking += 3;
+                similarityRanking += 1;
 
         }
     }
@@ -129,7 +129,7 @@ void Heap::setSimilarityRanking(Series curr)
     diff = abs(diff);
     if (diff <= 20)
     {
-        similarityRanking += 3;
+        similarityRanking += 1;
     }
 
     curr.setSimilarityRanking(similarityRanking);
@@ -142,10 +142,10 @@ void Heap::buildHeap()
     int startIdx = (n / 2) - 1;
 
     for (int i = startIdx; i >= 0; i--)
-        heapify(i);
+        heapSort(i);
 }
 
-void Heap::heapify(int index)
+void Heap::heapSort(int index)
 {
     int n = maxHeap.size();
     int l = index; 
@@ -161,7 +161,7 @@ void Heap::heapify(int index)
     if (l != index) 
     {
         swap(maxHeap[index], maxHeap[l]);
-        heapify(l);
+        heapSort(l);
     }
 }
 
