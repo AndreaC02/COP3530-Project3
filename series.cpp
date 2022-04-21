@@ -1,6 +1,3 @@
-//
-// Created by Andrea Chacon on 4/20/22.
-//
 #pragma once
 #include "series.h"
 
@@ -21,7 +18,7 @@ Series:: Series(){
     description = "";
 }
 
-Series:: Series(int id, int type, int _dateAdded, int releaseYr, int durTime, string _title, string dir,
+Series:: Series(string id, int type, int _dateAdded, int releaseYr, int durTime, string _title, string dir,
                 vector<string> castList, string country, string _rating, vector<string> genres, string _description, string platform){
     seriesId = id;
     type = type;

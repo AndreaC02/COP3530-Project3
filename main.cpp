@@ -19,12 +19,36 @@ void loadFromFile(string filename, hashTable& TABLE) {
     string line;
     string to, from;
 
+    //string id, int type, int dateAdded, int releaseYr, int durTime, string title, string dir,
+    //      vector<string> cast, string country, string rating, vector<string> genres, string description, string platform
+
     if (fileStream.is_open()) {
         while (getline(fileStream, line)) {
             istringstream stringStream(line);
             getline(stringStream, from, ',');
             getline(stringStream, to, ',');
-            Series s = new Series(data1, data2, ...)
+            /*
+            string id = getLine thing
+            if movie
+                int type = 1
+            else
+                int type = 2
+
+            //probably add soem helper functions for converting date added to MMDDYYYY format
+            dateAdded = getLine
+
+            string releaseYr = getline
+
+            durTime = getLine (will be in minutes or seasons)
+
+            title = getLine()
+
+            dir = getLine()
+
+
+            */
+
+            Series s = new Series(id, type, dateAdded,stoi(releaseYr), stoi(durTime), title, dir, )
             TABLE.insert(s);
 
         }

@@ -75,7 +75,9 @@ void hashTable:: remove(string title){
 }
 
 vector<Series> hashTable:: findMovieTitle(string title){
-    return map.at(hashFunction(title));
+    for(Series s: map.at(hashFunction(title)))
+        if(s.getTitle() == title)
+            return s;
 }
 
 vector<Series> hashTable:: findDirector(string director){

@@ -4,7 +4,7 @@
 using namespace std;
 
 class Series{
-    int seriesId;
+    string seriesId;
     int type; //0 for tv show, 1 for movie
     int dateAdded; //MMDDYYYY for simplest formating
     int releaseYear; //YYYY
@@ -22,9 +22,9 @@ class Series{
 
 public:
     Series();
-    Series(int id, int type, int dateAdded, int releaseYr, int durTime, string title, string dir,
+    Series(string id, int type, int dateAdded, int releaseYr, int durTime, string title, string dir,
            vector<string> cast, string country, string rating, vector<string> genres, string description, string platform);
-    int getSeriesId();
+    string getSeriesId();
     int getType();
     int getDateAdded();
     int getReleaseYear();
