@@ -73,18 +73,22 @@ string Series:: getSeriesId(){
         return streamingPlatform;}
     
     void Series:: print(){
-        cout << title << " " << rating << endl; 
-        cout << "Duration time" << durationTime << " " << durationType << endl;
-        cout << "Director: " << director << endl;
-        cout << "Cast: " ;
-        for(string c: cast)
-            cout << c << ", ";
-        cout << endl << "Produced in " << countryOfProduction << endl;
-        cout << "Genres: " ;
-        for(string g: genre)
-            cout << g << ", ";
-        cout << endl << "Streaming Platform: " << streamingPlatform;
-        cout << "Description: " << description;
+        if(title == "" )
+            cout << "Sorry, no title found" << endl;
+        else{
+            cout << title << " " << rating << endl; 
+            cout << "Duration time" << durationTime << " " << durationType << endl;
+            cout << "Director: " << director << endl;
+            cout << "Cast: " ;
+            for(string c: cast)
+                cout << c << ", ";
+            cout << endl << "Produced in " << countryOfProduction << endl;
+            cout << "Genres: " ;
+            for(string g: genre)
+                cout << g << ", ";
+            cout << endl << "Streaming Platform: " << streamingPlatform;
+            cout << "Description: " << description;
+        }
     }
 
     void Series:: setSimilarityRanking(int r){
