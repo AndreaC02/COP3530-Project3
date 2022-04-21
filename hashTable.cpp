@@ -24,9 +24,9 @@ int hashTable:: hashFunction(string title){
     int i = title.length() - 1;
     for(char c: title){
         index = int(c) * pow(7, i);
-        i++;
+        i--;
     }
-
+    
     //reduce
     index %= buckets;
     return index;
