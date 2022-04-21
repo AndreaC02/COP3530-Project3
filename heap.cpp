@@ -164,3 +164,11 @@ void Heap::heapify(int index)
         heapify(l);
     }
 }
+
+void Heap::setAllSimilarities(vector<Series> vect)
+{
+    for (int i = 0; i < vect.size(); i++)
+    {
+        setSimilarityRanking(vect[i]);
+    }
+}
