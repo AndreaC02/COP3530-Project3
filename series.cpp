@@ -41,7 +41,7 @@ Series:: Series(string id, int type, int _dateAdded, int releaseYr, int durTime,
     streamingPlatform = platform;
 }
 
-int Series:: getSeriesId(){
+string Series:: getSeriesId(){
     return seriesId; }
     int Series:: getType(){
     return type; }
@@ -73,7 +73,7 @@ int Series:: getSeriesId(){
         return streamingPlatform;}
     
     void Series:: print(){
-        cout << title < " " << rating << endl; 
+        cout << title << " " << rating << endl; 
         cout << "Duration time" << durationTime << " " << durationType << endl;
         cout << "Director: " << director << endl;
         cout << "Cast: " ;
@@ -82,7 +82,11 @@ int Series:: getSeriesId(){
         cout << endl << "Produced in " << countryOfProduction << endl;
         cout << "Genres: " ;
         for(string g: genre)
-            cout < g << ", ";
+            cout << g << ", ";
         cout << endl << "Streaming Platform: " << streamingPlatform;
         cout << "Description: " << description;
+    }
+
+    void Series:: setSimilarityRanking(int r){
+        similarityRanking = r;
     }

@@ -40,4 +40,5 @@ public:
     string getDescription();
     string getStreamingPlatform();
     void print();
+    void setSimilarityRanking(int r);
 };

@@ -88,7 +88,7 @@ void hashTable::printElements() {
     }
 }
 
-vector<Series> hashTable:: findTitle(string title){
+Series hashTable:: findTitle(string title){
     for(Series s: map.at(hashFunction(title)))
         if(s.getTitle() == title)
             return s;
