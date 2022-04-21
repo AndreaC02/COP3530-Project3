@@ -12,7 +12,7 @@ public:
     void push(Series obj);
     void pop();
     Series top();
-    void heapSort();
+    void heapSort(int i);
     void printSimilarities();
     void setSimilarityRanking(Series curr); 
     void setAllSimilarities(vector<Series> vect);
