@@ -15,7 +15,7 @@ class hashTable{
     vector<vector<Series>> map;//vector of vectors of Series objects;
 
 public:
-    hashTable(int b);
+    hashTable();
     float calculateLoadFactor();
     int hashFunction(string title);
     void insert(Series s);

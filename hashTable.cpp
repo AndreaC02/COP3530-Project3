@@ -6,9 +6,9 @@
 
 using namespace std;
 
-hashTable:: hashTable(int b){
+hashTable:: hashTable(){
     maxLoadFactor = .7;
-    buckets = b;
+    buckets = 16,000;
     elements = 0;
     map.resize(buckets);
 }
