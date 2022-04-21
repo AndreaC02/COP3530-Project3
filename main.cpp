@@ -9,6 +9,7 @@
 #include <iomanip>
 #include "series.h"
 #include "hashTable.h"
+#include "heap.h"
 
 using namespace std;
 
@@ -78,7 +79,40 @@ int main(){
 
         testing
     */
-    
+
+    /* testing heap
+    Heap myHeap;
+    Series series1 = Series(0, 0, 01012000, 2000, 90, "series1", "director1",
+    {"castMember1", "castMember2", "castMember3" }, "France", "MA", {"horror", "true crime"}, "description 1");
+    Series series2 = Series(0, 0, 01012000, 2000, 90, "series2", "director1",
+            {"castMember1", "castMember2"}, "France", "MA", {"horror", "true crime"}, "description ");
+    Series series3 = Series(0, 0, 01012000, 2000, 90, "series3", "director2",
+                            {"castMember1", "castMember2"}, "America", "MA", {"horror", "true crime"}, "description 3");
+    Series series4 = Series(0, 0, 01012000, 2000, 90, "series1", "director1",
+    {"castMember1", "castMember2", "castMember3" }, "France", "MA", {"horror", "true crime"}, "description 1");
+    Series series5 = Series(0, 0, 01012000, 2000, 90, "series2", "director1",
+            {"castMember1", "castMember2"}, "France", "MA", {"horror", "true crime"}, "description ");
+    Series series6 = Series(0, 0, 01012000, 2000, 90, "series3", "director2",
+                            {"castMember1", "castMember2"}, "America", "MA", {"horror", "true crime"}, "description 3");    
+    series1.getSimilarityRanking = 9;
+    series2.getSimilarityRanking = 10;    
+    series3.getSimilarityRanking = 20;
+    series4.getSimilarityRanking = 7;  
+    series3.getSimilarityRanking = 15;
+    series4.getSimilarityRanking = 11;                                             
+                            
+    myHeap.push(series1);
+    myHeap.push(series2);
+    myHeap.push(series3);
+    myHeap.push(series4);
+    myHeap.push(series5);
+    myHeap.push(series6);
+
+    myHeap.printSimilarities();
+
+    */ 
+
+
     unsigned int selection;
     bool keep;
     unsigned int dataType;   

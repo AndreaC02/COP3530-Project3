@@ -65,7 +65,12 @@ Series Heap::top()
     return maxHeap[0];
 
 }
-void Heap::heapSort()
-{
 
+void Heap::printSimilarities()
+{
+    for (int i = 0; i < maxHeap.size(); i++)
+    {
+        cout << maxHeap[i].getSimilarityRanking() << " " ;
+
+    }
 }

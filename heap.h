@@ -4,13 +4,15 @@ using namespace std;
 class Heap 
 {
 
-    vector<Series> heap;
+    vector<Series> maxHeap;
 
 public:
-    void push();
+    Heap();
+    void push(Series obj);
     void pop();
     Series top();
     void heapSort();
+    void printSimilarities();
     
 
 
