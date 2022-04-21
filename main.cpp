@@ -21,7 +21,6 @@ void loadFromFile(string filename, hashTable& TABLE, string platform) {
 
     //string id, int type, int dateAdded, int releaseYr, int durTime, string title, string dir,
     //      vector<string> cast, string country, string rating, vector<string> genres, string description, string platform
-    //testing
 
     if (fileStream.is_open()) {
         while (getline(fileStream, line)) {
