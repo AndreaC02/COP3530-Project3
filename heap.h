@@ -5,6 +5,7 @@ class Heap
 {
 
     vector<Series> maxHeap;
+    Series comparison;
 
 public:
     Heap();
@@ -13,6 +14,10 @@ public:
     Series top();
     void heapSort();
     void printSimilarities();
+    void setSimilarityRanking(Series curr);
+    void buildHeap();
+    void heapify(int index);
+    
     
 
 
