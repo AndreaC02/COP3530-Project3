@@ -21,12 +21,14 @@ void loadFromFile(string filename, hashTable& TABLE, string platform) {
 
     //string id, int type, int dateAdded, int releaseYr, int durTime, string title, string dir,
     //      vector<string> cast, string country, string rating, vector<string> genres, string description, string platform
+    //testing
 
     if (fileStream.is_open()) {
         while (getline(fileStream, line)) {
             istringstream stringStream(line);
             getline(stringStream, from, ',');
             getline(stringStream, to, ',');
+            Series s = new Series()
             /*
             string id = getLine thing
             if movie
@@ -57,6 +59,25 @@ void loadFromFile(string filename, hashTable& TABLE, string platform) {
 }
 
 int main(){
+    /*
+    //THIS IS WHAT I USED TO TEST THE HASHTABLE, I'm leaving it in case you need examples to test with
+    hashTable myMap = hashTable(2);
+    Series series1 = Series(0, 0, 01012000, 2000, 90, "series1", "director1",
+    {"castMember1", "castMember2", "castMember3" }, "France", "MA", {"horror", "true crime"}, "description 1");
+    Series series2 = Series(0, 0, 01012000, 2000, 90, "series2", "director1",
+            {"castMember1", "castMember2"}, "France", "MA", {"horror", "true crime"}, "description ");
+    Series series3 = Series(0, 0, 01012000, 2000, 90, "series3", "director2",
+                            {"castMember1", "castMember2"}, "America", "MA", {"horror", "true crime"}, "description 3");
+    myMap.insert(series1);
+    myMap.insert(series2);
+    myMap.insert(series3);
+    myMap.printElements();
+    vector<Series> sameDir = myMap.findDirector("director1");
+    for(Series s: sameDir)
+        cout << s.getTitle() << endl;
+
+        testing
+    */
     
     unsigned int selection;
     bool keep;
@@ -93,7 +114,7 @@ int main(){
         cout << "\nPlease input below whether you are searching for a \n1.  TV show \n2.    Movie" << endl;
         cin >> dataType;
         if(dataType != 1 && dataType != 2){
-//test
+ //test
 
             cout << "Invalid Selection! Please try again!" << endl;
 
