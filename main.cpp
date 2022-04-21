@@ -14,7 +14,7 @@ using namespace std;
 
 hashTable TABLE;
 
-void loadFromFile(string filename, hashTable& TABLE) {
+void loadFromFile(string filename, hashTable& TABLE, string platform) {
     ifstream fileStream(filename);
     string line;
     string to, from;
@@ -48,7 +48,7 @@ void loadFromFile(string filename, hashTable& TABLE) {
 
             */
 
-            Series s = new Series(id, type, dateAdded,stoi(releaseYr), stoi(durTime), title, dir, )
+            Series s = new Series(id, type, dateAdded,stoi(releaseYr), stoi(durTime), title, dir, ..., platform )
             TABLE.insert(s);
 
         }
@@ -81,10 +81,10 @@ int main(){
     hashTable Hulu;
     hashTable Amazon;
     hashTable Disney;
-    loadFromFile("netflix_titles.csv", Netflix);
-    loadFromFile("hulu_titles.csv", Hulu);
-    loadFromFile("amazon_prime_titles.csv", Amazon);
-    loadFromFile("disney_plus_titles.csv", Disney);
+    loadFromFile("netflix_titles.csv", Netflix, "Netflix");
+    loadFromFile("hulu_titles.csv", Hulu, "Hulu");
+    loadFromFile("amazon_prime_titles.csv", Amazon, "Amazon");
+    loadFromFile("disney_plus_titles.csv", Disney, "Disney");
 
     cout << "\nWelcome to Media Mogul! The algorithm tool that based on your inputs of your all-time favorite movies, tv-shows, directors, cast members, and other prefrences such as genre, length, release year, and rating, outputs suggested movies/tv shows just for you!";
     
