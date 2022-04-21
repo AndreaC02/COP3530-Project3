@@ -32,7 +32,7 @@ int hashTable:: hashFunction(string title){
     return index;
 }
 
-void hashTable:: insert(Series s){
+void hashTable:: insert(series s){
     int index = hashFunction(s.getTitle());
     map.at(index).push_back(s);
     elements++;
@@ -43,7 +43,7 @@ void hashTable:: insert(Series s){
 
 void hashTable:: rehash(){
     buckets *= 2;
-    vector<vector<Series>> resizedMap;
+    vector<vector<series>> resizedMap;
     resizedMap.resize(buckets);
     for(int i = 0; i < buckets / 2; i++){
         for(int j = 0; j < map.at(i).size(); j++){
@@ -54,8 +54,8 @@ void hashTable:: rehash(){
 }
 
 bool hashTable:: has(string title){
-    vector<Series> temp = map.at(hashFunction(title));
-    for(Series s: temp){
+    vector<series> temp = map.at(hashFunction(title));
+    for(series s: temp){
         if(s.getTitle() == title)
             return true;
     }
@@ -66,7 +66,7 @@ void hashTable:: remove(string title){
     int index = hashFunction(title);
     if(has(title)){
         int i = 0;
-        for(Series s: map[index]){
+        for(series s: map[index]){
             if(s.getTitle() == title){
                 map.at(index).erase(map.at(index).begin() + i);
                 elements--;
@@ -82,31 +82,31 @@ int hashTable::getSize() {
 
 void hashTable::printElements() {
     for (int i = 0; i < map.size(); ++i) {
-        for (Series j: map.at(i)) {
+        for (series j: map.at(i)) {
             cout << j.getTitle() << endl;
         }
     }
 }
 
-Series hashTable:: findTitle(string title){
-    for(Series s: map.at(hashFunction(title)))
+series hashTable:: findTitle(string title){
+    for(series s: map.at(hashFunction(title)))
         if(s.getTitle() == title)
             return s;
 }
 
-vector<Series> hashTable:: findDirector(string director){
-    vector<Series> series;
+vector<series> hashTable:: findDirector(string director){
+    vector<series> series;
     for(int i = 0; i < buckets; i++)
-        for(Series s: map.at(i))
+        for(series s: map.at(i))
             if(s.getDirector() == director)
                 series.push_back(s);
     return series;
 }
 
-vector<Series> hashTable:: findActor(string actor){
-    vector<Series> series;
+vector<series> hashTable:: findActor(string actor){
+    vector<series> series;
     for(int i = 0; i < buckets; i++)
-        for(Series s: map.at(i))
+        for(series s: map.at(i))
             for(string a: s.getCast()){
                 if(a == actor){
                     series.push_back(s);
@@ -116,39 +116,39 @@ vector<Series> hashTable:: findActor(string actor){
     return series;
 }
 
-vector<Series> hashTable:: findRuntime(int timeMin, int timeMax, int type){
-    vector<Series> series;
+vector<series> hashTable:: findRuntime(int timeMin, int timeMax, int type){
+    vector<series> series;
     for(int i = 0; i < buckets; i++)
-        for(Series s: map[i])
+        for(series s: map[i])
             if(s.getType() == type)
                 if(s.getDurationTime() >= timeMin  && s.getDurationTime() <= timeMax)
                     series.push_back(s);
     return series;
 }
 
-vector<Series> hashTable:: findGenre(string genre){
-   vector<Series> series;
+vector<series> hashTable:: findGenre(string genre){
+   vector<series> series;
     for(int i = 0; i < buckets; i++)
-        for(Series s: map[i])
+        for(series s: map[i])
             for(string g: s.getGenre())
                 if(g == genre)
                     series.push_back(s);
     return series; 
 }
 
-vector<Series> hashTable:: findReleaseYear(int year){
-   vector<Series> series;
+vector<series> hashTable:: findReleaseYear(int year){
+   vector<series> series;
     for(int i = 0; i < buckets; i++)
-        for(Series s: map[i])
+        for(series s: map[i])
             if(s.getReleaseYear() == year)
                 series.push_back(s);
     return series; 
 }
 
-vector<Series> hashTable:: findRating(string rating){
-   vector<Series> series;
+vector<series> hashTable:: findRating(string rating){
+   vector<series> series;
     for(int i = 0; i < buckets; i++)
-        for(Series s: map[i])
+        for(series s: map[i])
             if(s.getRating() == rating)
                 series.push_back(s);
     return series; 

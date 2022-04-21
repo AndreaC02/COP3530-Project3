@@ -95,7 +95,7 @@ void loadFromFile(string filename, hashTable& TABLE, string platform, hashTable&
             }
             getline(stringStream, description, ',');
 
-            Series s = Series(id, type, dateAdded, releaseYr, durTime, title, dir, cast, country, rating, genres, description, plat );
+            series s = series(id, type, dateAdded, releaseYr, durTime, title, dir, cast, country, rating, genres, description, plat );
             TABLE.insert(s);
             ALL.insert(s);
 
@@ -183,7 +183,7 @@ hashTable platformSelect(string platform, int type){
 
 }
 
-void printMethod(vector<Series> series){
+void printMethod(vector<series> series){
 
     bool cont = true;
     while(cont == true){
@@ -231,18 +231,18 @@ int main(){
     /*
     //THIS IS WHAT I USED TO TEST THE HASHTABLE, I'm leaving it in case you need examples to test with
     hashTable myMap = hashTable(2);
-    Series series1 = Series(0, 0, 01012000, 2000, 90, "series1", "director1",
+    series series1 = series(0, 0, 01012000, 2000, 90, "series1", "director1",
     {"castMember1", "castMember2", "castMember3" }, "France", "MA", {"horror", "true crime"}, "description 1");
-    Series series2 = Series(0, 0, 01012000, 2000, 90, "series2", "director1",
+    series series2 = series(0, 0, 01012000, 2000, 90, "series2", "director1",
             {"castMember1", "castMember2"}, "France", "MA", {"horror", "true crime"}, "description ");
-    Series series3 = Series(0, 0, 01012000, 2000, 90, "series3", "director2",
+    series series3 = series(0, 0, 01012000, 2000, 90, "series3", "director2",
                             {"castMember1", "castMember2"}, "America", "MA", {"horror", "true crime"}, "description 3");
     myMap.insert(series1);
     myMap.insert(series2);
     myMap.insert(series3);
     myMap.printElements();
-    vector<Series> sameDir = myMap.findDirector("director1");
-    for(Series s: sameDir)
+    vector<series> sameDir = myMap.findDirector("director1");
+    for(series s: sameDir)
         cout << s.getTitle() << endl;
 
         testing
@@ -250,17 +250,17 @@ int main(){
 
     /* testing heap
     Heap myHeap;
-    Series series1 = Series(0, 0, 01012000, 2000, 90, "series1", "director1",
+    series series1 = series(0, 0, 01012000, 2000, 90, "series1", "director1",
     {"castMember1", "castMember2", "castMember3" }, "France", "MA", {"horror", "true crime"}, "description 1");
-    Series series2 = Series(0, 0, 01012000, 2000, 90, "series2", "director1",
+    series series2 = series(0, 0, 01012000, 2000, 90, "series2", "director1",
             {"castMember1", "castMember2"}, "France", "MA", {"horror", "true crime"}, "description ");
-    Series series3 = Series(0, 0, 01012000, 2000, 90, "series3", "director2",
+    series series3 = series(0, 0, 01012000, 2000, 90, "series3", "director2",
                             {"castMember1", "castMember2"}, "America", "MA", {"horror", "true crime"}, "description 3");
-    Series series4 = Series(0, 0, 01012000, 2000, 90, "series1", "director1",
+    series series4 = series(0, 0, 01012000, 2000, 90, "series1", "director1",
     {"castMember1", "castMember2", "castMember3" }, "France", "MA", {"horror", "true crime"}, "description 1");
-    Series series5 = Series(0, 0, 01012000, 2000, 90, "series2", "director1",
+    series series5 = series(0, 0, 01012000, 2000, 90, "series2", "director1",
             {"castMember1", "castMember2"}, "France", "MA", {"horror", "true crime"}, "description ");
-    Series series6 = Series(0, 0, 01012000, 2000, 90, "series3", "director2",
+    series series6 = series(0, 0, 01012000, 2000, 90, "series3", "director2",
                             {"castMember1", "castMember2"}, "America", "MA", {"horror", "true crime"}, "description 3");    
     series1.getSimilarityRanking = 9;
     series2.getSimilarityRanking = 10;    
@@ -302,7 +302,7 @@ int main(){
     string ratingChose;
     int i;
     unsigned int input;
-    vector<Series> series;
+    vector<series> series;
 
     
     loadFromFile("netflix_titles.csv", Netflix, "Netflix", ALL, NetflixTV, NetflixMovie, ALLTV, ALLMovie);
@@ -487,7 +487,7 @@ int main(){
 
             cout << "\nPlease input name of media you are searching for:" << endl;
             cin >> title;
-            Series s;
+            series s;
             s = ALL.findTitle(title);
 
             bool validTitle = s.print();
@@ -511,11 +511,11 @@ int main(){
 
                 cout << "\nGreat! Here are suggested movies and TV shows based off of this title:" << endl;
                 Heap myHeap;
-                vector<Series> reducedSimilar = ALL.findGenre(s.getGenre()[0]);
+                vector<series> reducedSimilar = ALL.findGenre(s.getGenre()[0]);
                 myHeap.setComparison(s);
                 myHeap.setMaxHeap(reducedSimilar);
                 myHeap.setAllSimilarities(reducedSimilar);
-                for(Series x: reducedSimilar)
+                for(series x: reducedSimilar)
                     myHeap.push(x);
                 //figure out building heap here
 

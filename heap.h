@@ -4,21 +4,21 @@ using namespace std;
 class Heap 
 {
 
-    vector<Series> maxHeap;
-    Series comparison;
+    vector<series> maxHeap;
+    series comparison;
 
 public:
     Heap();
-    void push(Series obj);
+    void push(series obj);
     void pop();
-    Series top();
+    series top();
     void heapSort(int i);
     void printSimilarities();
-    void setSimilarityRanking(Series curr); 
-    void setAllSimilarities(vector<Series> vect);
+    void setSimilarityRanking(series curr); 
+    void setAllSimilarities(vector<series> vect);
     void buildHeap();
     void heapify(int index);
-    void setComparison(Series _comparison);
-    void setMaxHeap(vector<Series> _maxHeap);
+    void setComparison(series _comparison);
+    void setMaxHeap(vector<series> _maxHeap);
 
 };

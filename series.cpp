@@ -1,7 +1,7 @@
 #pragma once
 #include "series.h"
 
-Series:: Series(){
+series:: series(){
     seriesId = -1;
     type = -1;
     dateAdded = -1;
@@ -18,7 +18,7 @@ Series:: Series(){
     description = "";
 }
 
-Series:: Series(string id, int type, int _dateAdded, int releaseYr, int durTime, string _title, string dir,
+series:: series(string id, int type, int _dateAdded, int releaseYr, int durTime, string _title, string dir,
                 vector<string> castList, string country, string _rating, vector<string> genres, string _description, string platform){
     seriesId = id;
     type = type;
@@ -41,38 +41,38 @@ Series:: Series(string id, int type, int _dateAdded, int releaseYr, int durTime,
     streamingPlatform = platform;
 }
 
-string Series:: getSeriesId(){
+string series:: getSeriesId(){
     return seriesId; }
-    int Series:: getType(){
+    int series:: getType(){
     return type; }
-    int Series:: getDateAdded(){
+    int series:: getDateAdded(){
     return dateAdded; }
-    int Series:: getReleaseYear(){
+    int series:: getReleaseYear(){
     return releaseYear; }
-    int Series:: getSimilarityRanking(){
+    int series:: getSimilarityRanking(){
     return similarityRanking;}
-    int Series:: getDurationTime(){
+    int series:: getDurationTime(){
     return durationTime; }
-    string Series:: getDurationType(){
+    string series:: getDurationType(){
     return durationType; }
-    string Series:: getTitle(){
+    string series:: getTitle(){
     return title; }
-    string Series:: getDirector(){
+    string series:: getDirector(){
     return director; }
-    vector<string> Series:: getCast(){
+    vector<string> series:: getCast(){
     return cast; }
-    string Series:: getCountryofProduction(){
+    string series:: getCountryofProduction(){
     return countryOfProduction; }
-    string Series:: getRating(){
+    string series:: getRating(){
     return rating; }
-    vector<string> Series:: getGenre(){
+    vector<string> series:: getGenre(){
     return genre;}
-    string Series:: getDescription (){
+    string series:: getDescription (){
     return description; }
-    string Series:: getStreamingPlatform(){
+    string series:: getStreamingPlatform(){
         return streamingPlatform;}
     
-    bool Series:: print(){
+    bool series:: print(){
         if(title == "" ){
             cout << "Sorry, no title found!" << endl;
             return false;
@@ -94,6 +94,6 @@ string Series:: getSeriesId(){
         }
     }
 
-    void Series:: setSimilarityRanking(int r){
+    void series:: setSimilarityRanking(int r){
         similarityRanking = r;
     }
