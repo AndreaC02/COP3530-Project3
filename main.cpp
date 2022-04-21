@@ -18,8 +18,6 @@ int main(){
     vector<Series> sameDir = myMap.findDirector("director1");
     for(Series s: sameDir)
         cout << s.getTitle() << endl;
-
-        testing
     */
     
     int selection;
