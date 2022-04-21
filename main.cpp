@@ -9,6 +9,7 @@
 #include <iomanip>
 #include "series.h"
 #include "hashTable.h"
+#include "heap.h"
 
 using namespace std;
 
@@ -19,38 +20,57 @@ void loadFromFile(string filename, hashTable& TABLE, string platform) {
     string line;
     string to, from;
 
-    //string id, int type, int dateAdded, int releaseYr, int durTime, string title, string dir,
-    //      vector<string> cast, string country, string rating, vector<string> genres, string description, string platform
-    //resolving
+    string id;
+    int type;
+    int dateAdded;
+    int releaseYr;
+    int durTime;
+    string title;
+    string dir;
+    vector<string> cast;
+    string country;
+    string rating;
+    vector<string> genres;
+    string description;
+    string plat = platform;
+
 
     if (fileStream.is_open()) {
         while (getline(fileStream, line)) {
+
             istringstream stringStream(line);
-            getline(stringStream, from, ',');
-            getline(stringStream, to, ',');
-            Series s = new Series()
-            /*
-            string id = getLine thing
-            if movie
-                int type = 1
-            else
-                int type = 2
+            string temp;
 
-            //probably add soem helper functions for converting date added to MMDDYYYY format
-            dateAdded = getLine
+            getline(stringStream, id, ',');
+            getline(stringStream, temp, ',');
+            type = stoi(temp);
+            getline(stringStream, title, ',');
+            getline(stringStream, dir, ',');
+            getline(stringStream, temp, ','); // cast?
+            stringstream s_stream(temp);
+            while(s_stream.good()){
+                string substr;
+                getline(s_stream, substr, ',');
+                cast.push_back(substr)
+            }
+            getline(stringStream, country, ',');
+            getline(stringStream, temp, ',');
+            dateAdded = stoi(temp);
+            getline(stringStream, temp, ',');
+            releaseYr = stoi(temp);
+            getline(stringStream, rating, ',');
+            getline(stringStream, temp, ','); 
+            durTime = stoi(temp);           
+            getline(stringStream, temp, ','); //?
+            stringstream s_stream(temp);
+            while(s_stream.good()){
+                string substr;
+                getline(s_stream, substr, ',');
+                genres.push_back(substr)
+            }
+            getline(stringStream, description, ',');
 
-            string releaseYr = getline
-
-            durTime = getLine (will be in minutes or seasons)
-
-            title = getLine()
-
-            dir = getLine()
-
-
-            */
-
-            Series s = new Series(id, type, dateAdded,stoi(releaseYr), stoi(durTime), title, dir, ..., platform )
+            Series s = new Series(id, type, dateAdded, releaseYr, durTime, title, dir, cast, country, rating, genres, description, plat )
             TABLE.insert(s);
 
         }
@@ -78,7 +98,40 @@ int main(){
 
         testing
     */
-    
+
+    /* testing heap
+    Heap myHeap;
+    Series series1 = Series(0, 0, 01012000, 2000, 90, "series1", "director1",
+    {"castMember1", "castMember2", "castMember3" }, "France", "MA", {"horror", "true crime"}, "description 1");
+    Series series2 = Series(0, 0, 01012000, 2000, 90, "series2", "director1",
+            {"castMember1", "castMember2"}, "France", "MA", {"horror", "true crime"}, "description ");
+    Series series3 = Series(0, 0, 01012000, 2000, 90, "series3", "director2",
+                            {"castMember1", "castMember2"}, "America", "MA", {"horror", "true crime"}, "description 3");
+    Series series4 = Series(0, 0, 01012000, 2000, 90, "series1", "director1",
+    {"castMember1", "castMember2", "castMember3" }, "France", "MA", {"horror", "true crime"}, "description 1");
+    Series series5 = Series(0, 0, 01012000, 2000, 90, "series2", "director1",
+            {"castMember1", "castMember2"}, "France", "MA", {"horror", "true crime"}, "description ");
+    Series series6 = Series(0, 0, 01012000, 2000, 90, "series3", "director2",
+                            {"castMember1", "castMember2"}, "America", "MA", {"horror", "true crime"}, "description 3");    
+    series1.getSimilarityRanking = 9;
+    series2.getSimilarityRanking = 10;    
+    series3.getSimilarityRanking = 20;
+    series4.getSimilarityRanking = 7;  
+    series3.getSimilarityRanking = 15;
+    series4.getSimilarityRanking = 11;                                             
+                            
+    myHeap.push(series1);
+    myHeap.push(series2);
+    myHeap.push(series3);
+    myHeap.push(series4);
+    myHeap.push(series5);
+    myHeap.push(series6);
+
+    myHeap.printSimilarities();
+
+    */ 
+
+
     unsigned int selection;
     bool keep;
     unsigned int dataType;   
@@ -90,12 +143,12 @@ int main(){
     unsigned int maxSeason;
     unsigned int minSeason;
     unsigned int var;
-    string genre;
-    const char *genres[30] = {"Action", "Adventure", "Animation", "Black Stories", "Classics", "Comedy", "Crime", "Documentary", "Drama", "Family", "Health","History", "Horror", "International", "Kids", "LGBTQ+ Stories", "Music", "Musicals", "Mystery", "News", "Reality", "Romance", "Science-Fiction", "Sports", "Stand-Up", "Suspense", "Teen", "Thriller", "War", "Western" };
+    string genreChose;
+    const char *possGenres[30] = {"Action", "Adventure", "Animation", "Black Stories", "Classics", "Comedy", "Crime", "Documentary", "Drama", "Family", "Health","History", "Horror", "International", "Kids", "LGBTQ+ Stories", "Music", "Musicals", "Mystery", "News", "Reality", "Romance", "Science-Fiction", "Sports", "Stand-Up", "Suspense", "Teen", "Thriller", "War", "Western" };
     const char *tvRatings[11] = {"TV-G", "TV-Y", "TV-PG", "TV-Y7", "13+", "TV-14", "16+", "18+","TV-MA", "TV-NR", "ALL"};
     const char *movieRatings[16] = {,"G","PG","PG-13","R","NR","TV-G", "TV-Y", "TV-PG", "TV-Y7", "13+", "TV-14", "16+", "18+","TV-MA", "TV-NR", "ALL"};
     int year;
-    string rating;
+    string ratingChose;
     int i;
 
     hashTable Netflix;
@@ -178,7 +231,7 @@ int main(){
                         cout << (i+1) << ".    " << genres[i] << endl;
                     }
                     cin  >> var;
-                    genre = genres[var-1];
+                    genreChose = possGenres[var-1];
                     break;
                 }
                 case 6:
@@ -208,11 +261,11 @@ int main(){
 
                     if(dataType == 2){
 
-                        rating = movieRatings[var-1]; 
+                        ratingChose = movieRatings[var-1]; 
 
                     }else if(dataType == 1){
 
-                        rating = tvRatings[var-1];  
+                        ratingChose = tvRatings[var-1];  
 
                     }
 
