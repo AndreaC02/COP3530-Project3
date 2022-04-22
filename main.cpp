@@ -1,4 +1,4 @@
-#include <iostream>
+#include<iostream>
 #include <vector>
 #include <string>
 #include <sstream>
@@ -228,58 +228,6 @@ void printMethod(vector<Series> series){
 }
 
 int main(){
-    /*
-    //THIS IS WHAT I USED TO TEST THE HASHTABLE, I'm leaving it in case you need examples to test with
-    hashTable myMap = hashTable(2);
-    Series series1 = Series(0, 0, 01012000, 2000, 90, "series1", "director1",
-    {"castMember1", "castMember2", "castMember3" }, "France", "MA", {"horror", "true crime"}, "description 1");
-    Series series2 = Series(0, 0, 01012000, 2000, 90, "series2", "director1",
-            {"castMember1", "castMember2"}, "France", "MA", {"horror", "true crime"}, "description ");
-    Series series3 = Series(0, 0, 01012000, 2000, 90, "series3", "director2",
-                            {"castMember1", "castMember2"}, "America", "MA", {"horror", "true crime"}, "description 3");
-    myMap.insert(series1);
-    myMap.insert(series2);
-    myMap.insert(series3);
-    myMap.printElements();
-    vector<Series> sameDir = myMap.findDirector("director1");
-    for(Series s: sameDir)
-        cout << s.getTitle() << endl;
-
-        testing
-    */
-
-    /* testing heap
-    Heap myHeap;
-    Series series1 = Series(0, 0, 01012000, 2000, 90, "series1", "director1",
-    {"castMember1", "castMember2", "castMember3" }, "France", "MA", {"horror", "true crime"}, "description 1");
-    Series series2 = Series(0, 0, 01012000, 2000, 90, "series2", "director1",
-            {"castMember1", "castMember2"}, "France", "MA", {"horror", "true crime"}, "description ");
-    Series series3 = Series(0, 0, 01012000, 2000, 90, "series3", "director2",
-                            {"castMember1", "castMember2"}, "America", "MA", {"horror", "true crime"}, "description 3");
-    Series series4 = Series(0, 0, 01012000, 2000, 90, "series1", "director1",
-    {"castMember1", "castMember2", "castMember3" }, "France", "MA", {"horror", "true crime"}, "description 1");
-    Series series5 = Series(0, 0, 01012000, 2000, 90, "series2", "director1",
-            {"castMember1", "castMember2"}, "France", "MA", {"horror", "true crime"}, "description ");
-    Series series6 = Series(0, 0, 01012000, 2000, 90, "series3", "director2",
-                            {"castMember1", "castMember2"}, "America", "MA", {"horror", "true crime"}, "description 3");    
-    series1.getSimilarityRanking = 9;
-    series2.getSimilarityRanking = 10;    
-    series3.getSimilarityRanking = 20;
-    series4.getSimilarityRanking = 7;  
-    series3.getSimilarityRanking = 15;
-    series4.getSimilarityRanking = 11;                                             
-                            
-    myHeap.push(series1);
-    myHeap.push(series2);
-    myHeap.push(series3);
-    myHeap.push(series4);
-    myHeap.push(series5);
-    myHeap.push(series6);
-
-    myHeap.printSimilarities();
-
-    */ 
-
 
     unsigned int selection;
     bool keep;
