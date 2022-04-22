@@ -7,8 +7,11 @@
 #include <iomanip>
 #include <fstream>
 #include "series.h"
+#include "series.cpp"
 #include "hashTable.h"
+#include "hashTable.cpp"
 #include "heap.h"
+#include "heap.cpp"
 
 using namespace std;
 
@@ -49,72 +52,113 @@ void loadFromFile(string filename, hashTable& TABLE, string platform, hashTable&
     string description;
     string plat = platform;
 
+    int index = 0;
 
     if (fileStream.is_open()) {
-        while (getline(fileStream, line)) {
+        getline(fileStream, line);
+        while (getline(fileStream, line) && index<500) {
 
-            istringstream stringStream(line);
-            string temp;
+            try {
+                istringstream stringStream(line);
+                string temp;
 
-            getline(stringStream, id, ',');
-            getline(stringStream, temp, ',');
-            if(temp == "Movie"){
-                type = 1;
-                }else{
-                type = 0;
+                getline(stringStream, id, ',');
+                getline(stringStream, temp, ',');
+                if (temp == "Movie") {
+                    type = 1;
+                } else {
+                    type = 0;
                 }
-            getline(stringStream, title, ',');
-            getline(stringStream, dir, ',');
-            getline(stringStream, temp, ','); // cast
-            stringstream s_stream(temp);
-            while(s_stream.good()){
-                string substr;
-                getline(s_stream, substr, ',');
-                if(substr.at(0) == ' '){
-                    substr = substr.substr(1,(substr.length()-1));
+                getline(stringStream, title, ',');
+                getline(stringStream, dir, ',');
+                getline(stringStream, temp, ','); // first cast member
+                if(!temp.empty()){
+                    if(temp.find('"')!=string::npos){
+                        if (temp.at(0) == '"') {
+                            temp = temp.substr(1, (temp.length() - 1));
+                        }
+                        cast.push_back(temp);
+                    }
+                    getline(stringStream, temp, '"'); // cast
+                    stringstream s_stream(temp);
+                    while (s_stream.good()) {
+                        string substr;
+                        getline(s_stream, substr, ',');
+                        if(!substr.empty()){
+                            if (substr.at(0) == ' ') {
+                                substr = substr.substr(1, (substr.length() - 1));
+                            }
+                            cast.push_back(substr);}
+                    }
+                    getline(stringStream, temp, ','); // clear empty
                 }
-                cast.push_back(substr);
-            }
-            getline(stringStream, country, ',');
-            getline(stringStream, temp, ',');
-            dateAdded = stoi(temp);
-            getline(stringStream, temp, ',');
-            releaseYr = stoi(temp);
-            getline(stringStream, rating, ',');
-            getline(stringStream, temp, ','); 
-            durTime = stoi(temp);           
-            getline(stringStream, temp, ',');  // genre
-            stringstream s_stream(temp);
-            while(s_stream.good()){
-                string substr;
-                getline(s_stream, substr, ',');
-                if(substr.at(0) == ' '){
-                    substr = substr.substr(1,(substr.length()-1));
+
+                getline(stringStream, country, ',');
+                getline(stringStream, temp, ',');
+                dateAdded=0;
+                getline(stringStream, temp, ',');
+                try{
+                    releaseYr = stoi(temp);
+                }catch (exception){
+                    releaseYr=0;
                 }
-                genres.push_back(substr);
-            }
-            getline(stringStream, description, ',');
+                getline(stringStream, temp, ',');//throwaway
+                getline(stringStream, rating, ',');
+                getline(stringStream, temp, ',');
+                try{
+                    durTime = stoi(temp);
+                }catch (exception){
+                    durTime=3;
+                }
+                getline(stringStream, temp, ',');  // first genre
+                if(!temp.empty()){
+                    if(temp.find('"')!=string::npos){
+                        if (temp.at(0) == '"') {
+                            temp = temp.substr(1, (temp.length() - 1));
+                        }
+                        genres.push_back(temp);
+                    }
+                    getline(stringStream, temp, '"'); // cast
+                    stringstream s_stream(temp);
+                    while (s_stream.good()) {
+                        string substr;
+                        getline(s_stream, substr, ',');
+                        if(!substr.empty()){
+                            if (substr.at(0) == ' ') {
+                                substr = substr.substr(1, (substr.length() - 1));
+                            }
+                            genres.push_back(substr);}
+                    }
+                    getline(stringStream, temp, ','); // clear empty
+                }
+                getline(stringStream, description, ',');
 
-            Series s = Series(id, type, dateAdded, releaseYr, durTime, title, dir, cast, country, rating, genres, description, plat );
-            TABLE.insert(s);
-            ALL.insert(s);
+                Series s = Series(id, type, dateAdded, releaseYr, durTime, title, dir, cast, country, rating, genres,
+                                  description, plat);
+                TABLE.insert(s);
+                ALL.insert(s);
 
-            if(type == 0){
+                //cout<<"inserted: "<<s.getTitle();
 
-                TV.insert(s);
-                ALLTV.insert(s);
+                if (type == 0) {
 
-            }else if(type == 1){
+                    TV.insert(s);
+                    ALLTV.insert(s);
 
-                MOVIE.insert(s);
-                ALLMOVIE.insert(s);
+                } else if (type == 1) {
 
-            }
+                    MOVIE.insert(s);
+                    ALLMOVIE.insert(s);
 
+                }
+                index++;
+
+            }catch(exception){}
         }
         cout << "File Input from " << filename << " successful." << endl;
     }
 }
+
 
 
 hashTable platformSelect(string platform, int type){
@@ -181,23 +225,23 @@ hashTable platformSelect(string platform, int type){
             
     }
 
+    return TABLE;
 }
 
 void printMethod(vector<Series> series){
 
     bool cont = true;
-    while(cont == true){
+    int index = 0;
+    while(cont){
 
         int var;
-        int index = 0;
-        for(int l = 0; l <= 9; l++){
+        for(int l = 0; l <= 4; l++){
 
             if(index < series.size()){
 
-                series.at(l).print();
+                cout<<series.at(index).getTitle()<<"\n";
 
-            }
-            if(index == series.size()){
+            }else{
                 
                 cout << "End of list." << endl;
                 break;
@@ -214,13 +258,15 @@ void printMethod(vector<Series> series){
             cin >> var;
             if(var == 1){
                 cont = true;
-            }else if(var == 0){
+            }else if(var == 2){
                 cont = false;
             }else{
                 cout << "Invalid selection! Please try again." << endl;
                 cont = true;
             }
 
+        }else{
+            cont = false;
         }
 
     }
@@ -229,29 +275,10 @@ void printMethod(vector<Series> series){
 
 int main(){
 
-    unsigned int selection;
-    bool keep;
-    unsigned int dataType;   
-    string title;
-    string director;
-    string actor;
-    unsigned int maxMin;
-    unsigned int minMin;
-    unsigned int maxSeason;
-    unsigned int minSeason;
-    unsigned int var;
-    string platform;
-    string plat;
-    string genreChose;
-    const char *possGenres[30] = {"Action", "Adventure", "Animation", "Black Stories", "Classics", "Comedy", "Crime", "Documentary", "Drama", "Family", "Health","History", "Horror", "International", "Kids", "LGBTQ+ Stories", "Music", "Musicals", "Mystery", "News", "Reality", "Romance", "Science-Fiction", "Sports", "Stand-Up", "Suspense", "Teen", "Thriller", "War", "Western" };
-    const char *tvRatings[11] = {"TV-G", "TV-Y", "TV-PG", "TV-Y7", "13+", "TV-14", "16+", "18+","TV-MA", "TV-NR", "ALL"};
-    const char *movieRatings[16] = {"G","PG","PG-13","R","NR","TV-G", "TV-Y", "TV-PG", "TV-Y7", "13+", "TV-14", "16+", "18+","TV-MA", "TV-NR", "ALL"};
-    int year;
-    string ratingChose;
-    int i;
-    unsigned int input;
-    vector<Series> series;
+    bool keep=true;
 
+
+    cout <<"Loading..." << endl;
     
     loadFromFile("netflix_titles.csv", Netflix, "Netflix", ALL, NetflixTV, NetflixMovie, ALLTV, ALLMovie);
     loadFromFile("hulu_titles.csv", Hulu, "Hulu", ALL, HuluTV, HuluMovie, ALLTV, ALLMovie);
@@ -260,18 +287,25 @@ int main(){
 
     cout << "\nWelcome to Media Mogul! The algorithm tool that based on your inputs of your all-time favorite movies, tv-shows, directors, cast members, and other prefrences such as genre, length, release year, and rating, outputs suggested movies/tv shows just for you!" << endl;;
     
-    while(keep == true){
-        
-        cout << "\nPlease input below whether you would like to \n1. Receive suggestions based on your favorite series\n2. Receieve movie/show suggestions based on input\n 3. Quit" << endl;
+    while(keep){
+        const char *possGenres[30] = {"Action", "Adventure", "Animation", "Black Stories", "Classics", "Comedy", "Crime", "Documentary", "Drama", "Family", "Health","History", "Horror", "International", "Kids", "LGBTQ+ Stories", "Music", "Musicals", "Mystery", "News", "Reality", "Romance", "Science-Fiction", "Sports", "Stand-Up", "Suspense", "Teen", "Thriller", "War", "Western" };
+        const char *tvRatings[11] = {"TV-G", "TV-Y", "TV-PG", "TV-Y7", "13+", "TV-14", "16+", "18+","TV-MA", "TV-NR", "ALL"};
+        const char *movieRatings[16] = {"G","PG","PG-13","R","NR","TV-G", "TV-Y", "TV-PG", "TV-Y7", "13+", "TV-14", "16+", "18+","TV-MA", "TV-NR", "ALL"};
+
+        vector<Series> series;
+        cout << "\nPlease input below whether you would like to: \n1. Receive suggestions based on your favorite series\n2. Receive movie/show suggestions based on input\n3. Quit" << endl;
+        int input;
+        input = 2;
         cin >> input;
         if(input == 3){
 
             cout << "Are you sure you would like to quit Media Mogul? Enter 1 if Yes, you would like to quit, enter any other digit if you want to stay." << endl;
-                    cin >> var;
+            int var;
+            cin >> var;
                     if(var == 1){
 
                         cout << "Thank you for using Media Mogul! Goodbye!" << endl;;
-                        keep == false;
+                        keep = false;
 
                     }else{
 
@@ -281,7 +315,8 @@ int main(){
 
         }else if(input == 2){
     
-            cout << "\nPlease input below whether you are searching for a \n1.  TV show \n2.    Movie" << endl;
+            cout << "\nPlease input below whether you are searching for a: \n1.  TV show \n2.  Movie" << endl;
+            int dataType;
             cin >> dataType;
             if(dataType != 1 && dataType != 2){
 
@@ -289,8 +324,10 @@ int main(){
 
             }else{
 
-                cout << "\nSelect if you want to search by a specific platform.\n1.    Netflix\n2.    Hulu\n3.    Amazon Prime\n4.    Disney+\n5.    ALL" << endl;
+                cout << "\nSelect if you want to search by a specific platform:\n1.    Netflix\n2.    Hulu\n3.    Amazon Prime\n4.    Disney+\n5.    ALL" << endl;
+                int var;
                 cin >> var;
+                string platform;
                 if(var == 1){
 
                     platform = "Netflix";
@@ -320,7 +357,9 @@ int main(){
                 cout << "\nGreat choice. Now it's time to enter a filter. Please input a filters to recieve best suggestions. Select whether you would like to filter by  director name, cast member name, genre, release year, length, and rating." << endl;
                 
                     cout << "1.    Director Name \n2.    Length \n3.    Actor Name \n4.    Genre \n5.    Release Year \n6.    Rating" << endl;
+                    int selection;
                     cin >> selection;
+                    string director;
 
                     switch(selection){
 
@@ -340,8 +379,10 @@ int main(){
                             if(dataType == 2){
 
                                 cout << "Please input a maximum runtime in minutes:" << endl;
+                                int maxMin;
                                 cin >> maxMin;
                                 cout << "\nPlease input a minimum runtime in minutes:" << endl;
+                                int minMin;
                                 cin >> minMin;
 
                                 series = platformSelect(platform, 1).findRuntime(minMin, maxMin, 1);
@@ -350,8 +391,10 @@ int main(){
                             }else if(dataType == 1){
 
                                 cout << "Please enter a maximum number of seasons:" << endl;
+                                int maxSeason;
                                 cin >> maxSeason;
                                 cout << "\nPlease enter a minimum number of season:" << endl;
+                                int minSeason;
                                 cin >> minSeason;
 
                                 series = platformSelect(platform, 0).findRuntime(minSeason, maxSeason, 0);
@@ -364,6 +407,7 @@ int main(){
                         case 3:
                         {
                             cout << "Please input the name of your desired actor:" << endl;
+                            string actor;
                             cin  >> actor;
 
                             series = platformSelect(platform, dataType-1).findActor(actor);
@@ -374,9 +418,11 @@ int main(){
                         case 4:
                         {
                             cout << "Please input the genre you would like to see:" << endl;
-                            for(i=0; i <= 30; i++){
+                            for(int i=0; i <= 29; i++){
                                 cout << (i+1) << ".    " << possGenres[i] << endl;
                             }
+                            int var;
+                            string genreChose;
                             cin  >> var;
                             genreChose = possGenres[var-1];
                           
@@ -388,6 +434,7 @@ int main(){
                         case 5:
                         {
                             cout << "Please input the release year you are looking for:" << endl;
+                            int year;
                             cin  >> year;
 
                             series = platformSelect(platform, dataType-1).findReleaseYear(year);
@@ -401,13 +448,13 @@ int main(){
                             cout << "Please input the rating you are interested in:" << endl;
                             if(dataType == 2){
 
-                                for(i=0; i <= 16; i++){
+                                for(int i=0; i <= 16; i++){
                                     cout << (i+1) << ".    " << movieRatings[i] << endl;
                                 } 
 
                             }else if(dataType == 1){
 
-                                for(i=0; i <= 11; i++){
+                                for(int i=0; i <= 11; i++){
                                     cout << (i+1) << ".    " << tvRatings[i] << endl;
                                 }
 
@@ -415,7 +462,7 @@ int main(){
 
                             cin  >> var;
 
-                                ratingChose = tvRatings[var-1];  
+                                string ratingChose = tvRatings[var-1];
                                 series = platformSelect(platform, dataType-1).findRating(ratingChose);
                                 printMethod(series);
 
@@ -434,6 +481,7 @@ int main(){
         }else if(input == 1){
 
             cout << "\nPlease input name of media you are searching for:" << endl;
+            string title;
             cin >> title;
             Series s;
             s = ALL.findTitle(title);
@@ -441,21 +489,19 @@ int main(){
             bool validTitle = s.print();
 
             if(validTitle){
-                cout << "\nWould you like suggestions based off this title?\n1.    Yes\n2.    No" << endl;
-                cin >> var;
+            cout << "\nWould you like suggestions based off this title?\n1.    Yes\n2.    No" << endl;
+            int newvar;
+            cin >> newvar;
+            newvar=1;
             }
 
             else{
-                while(!validTitle){
-                    cout << "\nPlease input name of media you are searching for:" << endl;
-                    cin >> title;
-                    bool validTitle = s.print();
-                }
-                
+                cout<<"Invalid title!";
+            
             }
 
             
-            if(var == 1){
+            if(newvar == 1){
 
                 cout << "\nGreat! Here are suggested movies and TV shows based off of this title:" << endl;
                 Heap myHeap;
@@ -465,9 +511,9 @@ int main(){
                 myHeap.setAllSimilarities(reducedSimilar);
                 for(Series x: reducedSimilar)
                     myHeap.push(x);
-                //figure out building heap here
 
                 cout << "Here are the top 5 suggestions: ";
+                cout<<"Movie 1\nMovie 2\nMovie 3";
                 bool more;
                 do{
                    for(int i = 0; i < 5; i++){
@@ -489,7 +535,7 @@ int main(){
                 }while(more == true);
 
 
-            }else if(var == 0){
+            }else if(newvar == 0){
 
                 cout << "\nAlright, let's take you back." << endl;
 
@@ -501,10 +547,10 @@ int main(){
             
         }else{
 
-            cout << "Invalid input. Please try again!" << endl;
+            cout << "Invalid input. Please try again!" << input<< endl;
 
         }
 
-    } 
+    }
 
 }
