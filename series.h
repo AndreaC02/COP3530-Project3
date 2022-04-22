@@ -1,4 +1,5 @@
 //movie or tv show attributes
+#pragma once
 #include <iostream>
 #include <vector>
 using namespace std;

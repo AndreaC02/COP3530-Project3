@@ -7,31 +7,28 @@
 #include <iomanip>
 #include <fstream>
 #include "series.h"
-#include "series.cpp"
 #include "hashTable.h"
-#include "hashTable.cpp"
 #include "heap.h"
-#include "heap.cpp"
 
 using namespace std;
 
-hashTable TABLE;
+hashTable:: hashTable TABLE = hashTable();
 
-hashTable Netflix;
-hashTable NetflixTV;
-hashTable NetflixMovie;
-hashTable Hulu;
-hashTable HuluTV;
-hashTable HuluMovie;
-hashTable Amazon;
-hashTable AmazonTV;
-hashTable AmazonMovie;
-hashTable Disney;
-hashTable DisneyTV;
-hashTable DisneyMovie;
-hashTable ALL;
-hashTable ALLTV;
-hashTable ALLMovie;
+hashTable:: hashTable Netflix= hashTable();
+hashTable:: hashTable NetflixTV= hashTable();
+hashTable:: hashTable NetflixMovie= hashTable();
+hashTable:: hashTable Hulu= hashTable();
+hashTable:: hashTable HuluTV= hashTable();
+hashTable:: hashTable HuluMovie= hashTable();
+hashTable:: hashTable Amazon= hashTable();
+hashTable:: hashTable AmazonTV= hashTable();
+hashTable:: hashTable AmazonMovie= hashTable();
+hashTable:: hashTable Disney= hashTable();
+hashTable:: hashTable DisneyTV= hashTable()
+hashTable:: hashTable DisneyMovie= hashTable();
+hashTable:: hashTable ALL= hashTable();
+hashTable:: hashTable ALLTV= hashTable();
+hashTable:: hashTable ALLMovie= hashTable();
 
 void loadFromFile(string filename, hashTable& TABLE, string platform, hashTable& ALL, hashTable& TV, hashTable& MOVIE, hashTable& ALLTV, hashTable& ALLMOVIE) {
     ifstream fileStream(filename);
@@ -487,10 +484,10 @@ int main(){
             s = ALL.findTitle(title);
 
             bool validTitle = s.print();
+            int newvar;
 
             if(validTitle){
             cout << "\nWould you like suggestions based off this title?\n1.    Yes\n2.    No" << endl;
-            int newvar;
             cin >> newvar;
             newvar=1;
             }
@@ -504,7 +501,7 @@ int main(){
             if(newvar == 1){
 
                 cout << "\nGreat! Here are suggested movies and TV shows based off of this title:" << endl;
-                Heap myHeap;
+                Heap myHeap = Heap();
                 vector<Series> reducedSimilar = ALL.findGenre(s.getGenre()[0]);
                 myHeap.setComparison(s);
                 myHeap.setMaxHeap(reducedSimilar);
